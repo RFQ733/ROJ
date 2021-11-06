@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.js"></script>
+    <title>Document</title>
+    <link rel="stylesheet" href="css.css">
+</head>
+<body   bgcolor="green" >
+
+<div id="login-box">
+<form action="./login.php" method="POST" id="form1">
+        <h1>Login</h1>
+        <div class="input-box">
+            <i class="iconfont">&#xe609;</i>
+
+            <input type="text" placeholder="UserName" id="username" name="username"/>
+        </div>
+        <div class="input-box">
+            <i class="iconfont">&#xe605;</i>
+            <input type="password" placeholder="UserPassword"  id="password" name="password" />
+        </div>
+
+    <div class="input-box">
+        <i class="iconfont">&#xe605;</i>
+        <input  type="submit"  value="submit" />
+    </div>
+
+
+
+</form>
+
+
+<button id = "submi">Sign in</button>
+    <div id="app"></div>
+</div>
+
+
+
+<script>
+    var word
+    function check() {
+        if( $("#password").val() == null || $("#password").val() == ""  ){
+            alert("password is empty " ) ;
+            return false ;
+        }
+        return true ;
+    }
+
+    $('#submi').click(()=>{
+        var ans = check() ;
+
+        if (ans === true ) {
+
+
+            // form1.submit() ;
+            $.post("./login.php" , {
+                username:$("#username").value,
+                password:$("#password").value
+            } ,
+            (res)=>{
+                console.log('访问成功')
+                console.log(res)
+                word = res
+                $("#app")[0].innerHTML ='登陆状态：' +  word
+            },)
+
+
+
+            // $.ajax({
+            //     url:"/api/login.check.php" ,
+            //     contentType:"application/json",
+            //     dataType:"json" ,
+            //     data:{
+            //         username:$("#username").value,
+            //         password:$("#password").value
+            //     } ,
+            //     type: "POST" ,
+            //     // async:false,
+            //     success:(res)=>{
+            //         $("#app").value = res ;
+            //     }
+            // })
+            // $("#app")[0].innerHTML = word
+        }
+
+
+    })
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+  
+  <!-- Latest compiled and minified CSS & JS -->
+  <link rel="stylesheet" media="screen" href="//netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- Latest compiled and minified JS -->
+<script src="//code.jquery.com/jquery.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  
+  <style>
+    * {
+      padding: 0;
+      margin: 1rem;
+    }
+    html, body {
+        margin: 0;
+      height: 100%;
+      background: linear-gradient(rgb(64, 143, 146),rgb(71, 161, 71));
+      display: flex;
+      flex-direction: column;
+        justify-content: center;
+        align-items: center;
+}
+      /* place-items: center; */
+    
+    
+  </style>
+</head>
+<body>
+    
+    
+    <div class="col-xs-4 col-sm-4 col-md-4 col-lg3" style="color: bisque;" role="form" name="form1">
+        <h1>adminLogin</h1>
+    </div>
+    
+    <fc-typing-input white="" placeholder="username" class="absolute top-0 right-0 bottom-0 left-52 m-auto " id="adminname" name ="adminname">
+
+    </fc-typing-input>
+    <fc-typing-input white="" placeholder="password" class="absolute top-0 right-0 bottom-0 left-52 m-auto" name ="password" id="password" >
+
+    </fc-typing-input>
+    <div>
+    <!-- <button type="button" class="btn btn-success">submit</button>
+    <button type="button" class="btn btn-success">Reset</button> -->
+    <fc-dbl-warp-btn class="absolute top-0 right-0 bottom-0 left-52 m-auto fcbtn" >submit</fc-dbl-warp-btn>
+    </div>
+    
+    <div id="div1"></div>
+
+  <script type="module">
+    // 从 fancy-components 中引入组件
+    // 这里拿 FcWaveFilter 来举例
+    
+    import {  FcTypingInput ,FcDblWarpBtn } from 'https://unpkg.com/fancy-components'
+
+    // new 就相当于全局注册了这个组件，相当于 Vue 的 Vue.component('fc-wave-filter', FcWaveFilter)
+    new FcDblWarpBtn()
+    new FcTypingInput('fc-typing-input')
+  </script>
+  <script>
+      
+      $(".fcbtn").click(()=>{
+       
+        var url = "/winds_war_exploded/login" ;
+        axios.post(url, {
+            username:$("#username")[0].innerHTML ,
+            password:$("#password")[0].innerHTML 
+        })
+        .then(function (response) {
+            
+            $("#div1").html( response.data['title'] ) ;
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
+
+      })
+  </script>
+</body>
+</html>
+
